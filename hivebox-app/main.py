@@ -1,4 +1,7 @@
-import version
+import uvicorn
+import routes
+
+routes.app.include_router(routes.router)
 
 if __name__ == "__main__":
-    version.print_version()
+    uvicorn.run("main:routes.app", host="0.0.0.0", port=5000, reload=True)
