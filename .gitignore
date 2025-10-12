@@ -1,3 +1,4 @@
-hivebox-app/.venv
-hivebox-app/*/__pycache__
-hivebox-app/__pycache__
+hivebox-app/*/__pycache__/
+hivebox-app/__pycache__/
+.venv/
+.pytest_cache/
