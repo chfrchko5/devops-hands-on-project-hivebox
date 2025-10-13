@@ -16,11 +16,9 @@ jobs:
               uses: actions/checkout@v4
 
             - name: python linter
-              uses: super-linter/super-linter@v8.2.0
-              env:
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                VALIDATE_PYTHON: true
-                DEFAULT_BRANCH: feature/github-actions-file
+              uses: chartboost/ruff-action@v1
+              with:
+                args: check hivebox-app/.
             
             - name: auto tag
               uses: mathieudutour/github-tag-action@v6.2
