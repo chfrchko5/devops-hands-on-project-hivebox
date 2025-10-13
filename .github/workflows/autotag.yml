@@ -1,4 +1,4 @@
-name: auto increment tag for python app
+name: lint-and-autotag
 
 on:
     push:

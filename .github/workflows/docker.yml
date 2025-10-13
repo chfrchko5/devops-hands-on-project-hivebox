@@ -1,10 +1,11 @@
-name: create docker image
+name: docker
 
 on:
     workflow_run:
-        workflows: ["auto increment tag for python app"]
-        types:
-            - completed
+        workflows: ["lint-and-autotag"]
+        types: [completed]
+        branches: main
+            
 
 jobs:
     docker-image:
