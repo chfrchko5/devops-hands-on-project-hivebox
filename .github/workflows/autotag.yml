@@ -1,0 +1,53 @@
+name: auto increment tag for python app
+
+on:
+    push:
+        branches:
+            - main
+        paths:
+            - 'hivebox-app/**'
+
+jobs:
+    lint-and-pytest:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: checkout repo
+              uses: actions/checkout@v4
+
+            - name: python linter
+              uses: chartboost/ruff-action@v1
+              with:
+                args: check hivebox-app/.
+
+            - name: python setup
+              uses: actions/setup-python@v6
+
+            - name: install dependencies
+              run:
+                pip install -r hivebox-app/requirements.txt
+
+            - name: run pytest
+              run: pytest
+              
+    auto-tag:
+        runs-on: ubuntu-latest
+        needs: lint-and-pytest
+
+        steps:
+            - name: checkout repo
+              uses: actions/checkout@v4
+            
+            - name: auto tag
+              uses: mathieudutour/github-tag-action@v6.2
+              id: tag_version
+              with:
+                github_token: ${{ secrets.GITHUB_TOKEN }}
+                release_branches: main
+
+            - name: create github release from tag
+              uses: ncipollo/release-action@v1
+              with:
+                tag: ${{ steps.tag_version.outputs.new_tag }}
+                name: Release ${{ steps.tag_version.outputs.new_tag }}
+                body: ${{ steps.tag_version.outputs.changelog }}
