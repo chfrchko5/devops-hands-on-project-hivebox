@@ -20,7 +20,7 @@ jobs:
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                 VALIDATE_PYTHON: true
-                DEFAULT_BRANCH: main
+                DEFAULT_BRANCH: feature/github-actions-file
             
             - name: auto tag
               uses: mathieudutour/github-tag-action@v6.2
