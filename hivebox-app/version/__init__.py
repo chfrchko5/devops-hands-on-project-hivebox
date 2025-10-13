@@ -1,5 +1,11 @@
-from importlib.metadata import version
-__version__ = version("hivebox-app")
+import subprocess
 
-def print_version():
-    return __version__
+def get_version():
+    try:
+        version = subprocess.check_output(
+            ["git", "describe", "--tags", "--always"],
+            stderr=subprocess.DEVNULL,
+        ).decode().strip()
+    except Exception:
+        version = "unknown"
+    return version
