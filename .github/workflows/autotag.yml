@@ -79,4 +79,5 @@ jobs:
               uses: docker/build-push-action@v6
               with:
                 push: true
+                context: hivebox-app/.
                 tags: ${{ secrets.DOCKER_USERNAME}}/hivebox-app:${{ steps.tag.outputs.TAG }}
