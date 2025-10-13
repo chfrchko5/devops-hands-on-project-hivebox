@@ -3,7 +3,7 @@ name: auto increment tag for python app
 on:
     push:
         branches:
-            - feature/github-actions-file
+            - main
         paths:
             - 'hivebox-app/**'
 
@@ -25,7 +25,7 @@ jobs:
               id: tag_version
               with:
                 github_token: ${{ secrets.GITHUB_TOKEN }}
-                release_branches: feature/github-actions-file
+                release_branches: main
 
             - name: create github release from tag
               uses: ncipollo/release-action@v1
