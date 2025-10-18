@@ -59,6 +59,8 @@ jobs:
         steps:
             - name: checkout repo
               uses: actions/checkout@v4
+              with:
+                fetch-depth: 0
 
             - name: lint the dockerfile
               uses: hadolint/hadolint-action@v3.1.0
@@ -70,10 +72,9 @@ jobs:
               with:
                 username: ${{ secrets.DOCKER_USERNAME }}
                 password: ${{ secrets.DOCKER_PASSWORD }}
-            
-            - name: create and push docker image
-              uses: docker/build-push-action@v6
-              with:
-                push: true
-                context: ./hivebox-app
-                tags: chfrchko7/hivebox-app:latest
+                
+            - name: push docker image
+              run: |
+                TAG=$(git describe --tags)
+                docker build -t chfrchko7/hivebox-app:$TAG ./hivebox-app
+                docker push chfrchko7/hivebox-app:$TAG
