@@ -3,7 +3,7 @@ name: lint-and-autotag
 on:
     push:
         branches:
-            - feature/docker_auto_version
+            - main
         paths:
             - 'hivebox-app/**'
 
@@ -43,7 +43,7 @@ jobs:
               id: tag_version
               with:
                 github_token: ${{ secrets.GITHUB_TOKEN }}
-                release_branches: feature/docker_auto_version
+                release_branches: main
 
             - name: create github release from tag
               uses: ncipollo/release-action@v1
