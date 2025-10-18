@@ -81,4 +81,4 @@ jobs:
               with:
                 push: true
                 context: ./hivebox-app
-                tags: chfrchko7/hivebox-app:$repo_ver
+                tags: chfrchko7/hivebox-app:$TAG
