@@ -61,10 +61,9 @@ jobs:
               uses: actions/checkout@v4
 
             - name: save repo version to env var
-              id: repo_ver
               run: |
-                repo_ver=$(git describe --tags)
-                echo "repo_ver=$repo_ver" >> $GITHUB_ENV
+                TAG=$(git describe --tags)
+                echo "TAG=$TAG" >> $GITHUB_ENV
 
             - name: lint the dockerfile
               uses: hadolint/hadolint-action@v3.1.0
