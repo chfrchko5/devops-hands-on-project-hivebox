@@ -59,10 +59,12 @@ jobs:
         steps:
             - name: checkout repo
               uses: actions/checkout@v4
+              with:
+                fetch-depth: 0
 
             - name: save repo version to env var
               run: |
-                TAG=$(git fetch --prune --unshallow --tags)
+                TAG=$(git describe --tags)
                 echo "TAG=$TAG" >> $GITHUB_ENV
 
             - name: lint the dockerfile
