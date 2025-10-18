@@ -62,11 +62,6 @@ jobs:
               with:
                 fetch-depth: 0
 
-            - name: save repo version to env var
-              run: |
-                TAG=$(git describe --tags)
-                echo "TAG=$TAG" >> $GITHUB_ENV
-
             - name: lint the dockerfile
               uses: hadolint/hadolint-action@v3.1.0
               with:
@@ -78,9 +73,8 @@ jobs:
                 username: ${{ secrets.DOCKER_USERNAME }}
                 password: ${{ secrets.DOCKER_PASSWORD }}
                 
-            - name: create and push docker image
-              uses: docker/build-push-action@v6
-              with:
-                push: true
-                context: ./hivebox-app
-                tags: chfrchko7/hivebox-app:$TAG
+            - name: push docker image
+              run: |
+                TAG=$(git describe --tags)
+                docker build -t chfrchko7/hivebox-app:$TAG ./hivebox-app
+                docker push chfrchko7/hivebox-app:$TAG
