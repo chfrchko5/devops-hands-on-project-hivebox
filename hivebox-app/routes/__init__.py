@@ -1,9 +1,12 @@
 import version
 import api_data
 from fastapi import FastAPI, APIRouter
+from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI()
 router = APIRouter()
+
+Instrumentator().instrument(app).expose(app)
 
 @router.get("/version")
 async def appversion():
