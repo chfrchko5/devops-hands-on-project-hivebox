@@ -7,7 +7,7 @@ app = FastAPI()
 router = APIRouter()
 
 Instrumentator().instrument(app).expose(app)
-
+ 
 @router.get("/version")
 async def appversion():
     return {"version": version.get_version()}
@@ -15,11 +15,11 @@ async def appversion():
 @router.get("/temperature")
 async def temperature():
     if api_data.average_temps <= 10:
-        return {"average temperature": f"{api_data.average_temps} (Too Cold)"}
+        return {"average temperature": f"{round(api_data.average_temps, 2)} (Too Cold)"}
     elif 10 < api_data.average_temps <=36:
-        return {"average temperature": f"{api_data.average_temps} (Good)"}
+        return {"average temperature": f"{round(api_data.average_temps, 2)} (Good)"}
     elif api_data.average_temps > 36:
-        return {"average temperature": f"{api_data.average_temps} (Too Hot)"}
+        return {"average temperature": f"{round(api_data.average_temps, 2)} (Too Hot)"}
     else:
         return {"warning": "error in temperature calculation"}
     

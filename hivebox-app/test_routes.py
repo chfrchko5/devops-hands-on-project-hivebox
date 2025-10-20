@@ -12,5 +12,7 @@ def test_get_version():
 
 def test_get_temperature():
     response = client.get('/temperature')
+    value = response.json()
+    temp = value["average temperature"].split()[0]
     assert response.status_code == 200
-    assert response.json() == {"average temperature": average_temps}
+    assert str(temp) == str(round(average_temps, 2))
