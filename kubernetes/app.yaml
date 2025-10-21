@@ -1,0 +1,71 @@
+---
+# application deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hivebox-app-deployment
+  namespace: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hivebox-app
+  template:
+    metadata:
+      labels:
+        app: hivebox-app
+    spec:
+      containers:
+      - name: hivebox-app-container
+        image: chfrchko7/hivebox-app:v0.0.10
+        ports:
+        - containerPort: 5005
+
+---
+# service for the app
+apiVersion: v1
+kind: Service
+metadata:
+  name: hivebox-app-svc
+  namespace: app
+spec:
+  selector:
+    app: hivebox-app
+  ports:
+  - port: 5005
+    protocol: TCP
+    targetPort: 5005
+
+---
+# ingress to access the app
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hivebox-app-ingress
+  namespace: app
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+    paths:
+    - path: /metrics
+      pathType: Prefix
+      backend:
+        service:
+          name: hivebox-app-svc
+          port:
+            number: 5005
+    - path: /temperature
+      pathType: Prefix
+      backend:
+        service:
+          name: hivebox-app-svc
+          port:
+            number: 5005
+    - path: /version
+      pathType: Prefix
+      backend:
+        service:
+          name: hivebox-app-svc
+          port:
+            number: 5005
