@@ -10,7 +10,7 @@ Instrumentator().instrument(app).expose(app)
  
 @router.get("/version")
 async def appversion():
-    return {"version": version.get_version()}
+    return {"version": version.__version__}
 
 @router.get("/temperature")
 async def temperature():

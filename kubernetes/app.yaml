@@ -32,7 +32,7 @@ spec:
   selector:
     app: hivebox-app
   ports:
-  - port: 5005
+  - port: 80
     protocol: TCP
     targetPort: 5005
 
@@ -44,28 +44,13 @@ metadata:
   name: hivebox-app-ingress
   namespace: app
 spec:
-  ingressClassName: nginx
   rules:
   - http:
-    paths:
-    - path: /metrics
-      pathType: Prefix
-      backend:
-        service:
-          name: hivebox-app-svc
-          port:
-            number: 5005
-    - path: /temperature
-      pathType: Prefix
-      backend:
-        service:
-          name: hivebox-app-svc
-          port:
-            number: 5005
-    - path: /version
-      pathType: Prefix
-      backend:
-        service:
-          name: hivebox-app-svc
-          port:
-            number: 5005
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: hivebox-app-svc
+            port:
+              number: 80
