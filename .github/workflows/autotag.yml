@@ -76,5 +76,5 @@ jobs:
             - name: push docker image
               run: |
                 TAG=$(git describe --tags)
-                docker build -t chfrchko7/hivebox-app:$TAG ./hivebox-app
+                docker build --build-arg APP_VERSION=$TAG -t chfrchko7/hivebox-app:$TAG ./hivebox-app
                 docker push chfrchko7/hivebox-app:$TAG
