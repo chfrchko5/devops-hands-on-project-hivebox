@@ -19,10 +19,12 @@ jobs:
           uses: tenable/terrascan-action@main
           with:
             iac_type: 'k8s'
+            iac_version: 'v1'
+            iac_dir: './kubernetes'
             only_warn: true
-            sarif_upload: true
+        #     sarif_upload: true
 
-        - name: Upload SARIF file
-          uses: github/codeql-action/upload-sarif@v3
-          with:
-            sarif_file: terrascan.sarif
+        # - name: Upload SARIF file
+        #   uses: github/codeql-action/upload-sarif@v3
+        #   with:
+        #     sarif_file: terrascan.sarif
