@@ -19,8 +19,6 @@ jobs:
           uses: tenable/terrascan-action@main
           with:
             iac_type: 'k8s'
-            iac_version: 'v1'
-            iac_dir: './kubernetes'
             only_warn: true
             sarif_upload: true
 
