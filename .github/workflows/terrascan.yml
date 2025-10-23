@@ -1,0 +1,30 @@
+name: terrascan of k8s resources
+
+on:
+    push:
+        branches:
+            - main
+    workflow_dispatch:
+        
+jobs:
+    terrascan:
+        runs-on: ubuntu-latest
+
+        steps:
+        - name: checkout repo
+          uses: actions/checkout@v4
+
+        - name: run terrascan
+          id: terrascan
+          uses: tenable/terrascan-action@main
+          with:
+            iac_type: 'k8s'
+            iac_version: 'v1'
+            iac_dir: './kubernetes'
+            only_warn: true
+            sarif_upload: true
+
+        - name: Upload SARIF file
+          uses: github/codeql-action/upload-sarif@v1
+          with:
+            sarif_file: terrascan.sarif
