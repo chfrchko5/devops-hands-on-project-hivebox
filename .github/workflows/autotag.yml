@@ -28,8 +28,6 @@ jobs:
                 pip install -r hivebox-app/requirements.txt
 
             - name: run pytest
-              env:
-                SKIP_VALKEY: "1"
               run: pytest
               
     auto-tag:
@@ -76,7 +74,6 @@ jobs:
                 password: ${{ secrets.DOCKER_PASSWORD }}
                 
             - name: push docker image
-              
               run: |
                 TAG=$(git describe --tags)
                 docker build --build-arg APP_VERSION=$TAG -t chfrchko7/hivebox-app:$TAG ./hivebox-app

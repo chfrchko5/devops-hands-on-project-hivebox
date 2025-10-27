@@ -1,7 +1,7 @@
 from fastapi.testclient import TestClient
 from routes import app
 from version import get_version
-from api_data import average_temps
+# from api_data import average_temps
 
 client = TestClient(app)
 
