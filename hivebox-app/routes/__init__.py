@@ -3,14 +3,18 @@ import api_data
 from fastapi import FastAPI, APIRouter, HTTPException
 from prometheus_fastapi_instrumentator import Instrumentator
 import redis
+import os
 
-valkey = redis.Redis(
-    host="valkey.datastores.svc.cluster.local",
-    port=6379,
-    db=0,
-    decode_responses=True
-)
 
+valkey = None
+if not os.getenv("SKIP_VALKEY"):
+    valkey = redis.Redis(
+        host=os.getenv("VALKEY_HOST", "localhost"),
+        port=int(os.getenv("VALKEY_PORT", 6379)),
+        db=0,
+        decode_responses=True
+    )
+    
 app = FastAPI()
 router = APIRouter()
 

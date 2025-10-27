@@ -16,9 +16,14 @@ spec:
     spec:
       containers:
       - name: hivebox-app-container
-        image: chfrchko7/hivebox-app:v0.0.11
+        image: chfrchko7/hivebox-app:v0.0.12
         ports:
         - containerPort: 5005
+        env:
+        - name: VALKEY_HOST
+          value: "valkey.datastores.svc.cluster.local"
+        - name: VALKEY_PORT
+          value: "6379"
 
 ---
 # service for the app
