@@ -108,11 +108,31 @@ spec:
             storage: 5Gi
 
 ---
+# service to expose valkey
+apiVersion: v1
+kind: Service
+metadata:
+  name: valkey
+  namespace: datastores
+spec:
+  selector:
+    app: valkey
+  ports:
+    - name: client
+      port: 6379
+      targetPort: 6379
+    - name: metrics
+      port: 9121
+      targetPort: 9121
+  clusterIP: None
+
+---
 # config map for valkey
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: valkey
+  namespace: datastores
 data:
   valkey.conf: |
     protected-mode no
@@ -125,10 +145,6 @@ data:
     #!/bin/sh
 
     cp /etc/valkey/valkey.conf /tmp/valkey.conf
-    if [ "${REPLICAS}" -gt "1" ]; then
-      echo "replica-announce-ip ${POD_IP}" >> /tmp/valkey.conf
-      echo "cluster-announce-ip ${POD_IP}" >> /tmp/valkey.conf
-    fi
     cp /tmp/valkey.conf /config/valkey.conf
 
     mkdir -p /data
