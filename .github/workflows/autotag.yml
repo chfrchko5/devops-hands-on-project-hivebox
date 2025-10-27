@@ -63,6 +63,8 @@ jobs:
                 fetch-depth: 0
 
             - name: lint the dockerfile
+              env:
+                SKIP_VALKEY: "1"
               uses: hadolint/hadolint-action@v3.1.0
               with:
                 dockerfile: hivebox-app/Dockerfile
@@ -74,8 +76,7 @@ jobs:
                 password: ${{ secrets.DOCKER_PASSWORD }}
                 
             - name: push docker image
-              env:
-                SKIP_VALKEY: "1"
+              
               run: |
                 TAG=$(git describe --tags)
                 docker build --build-arg APP_VERSION=$TAG -t chfrchko7/hivebox-app:$TAG ./hivebox-app
