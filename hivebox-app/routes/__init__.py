@@ -5,6 +5,7 @@ from prometheus_fastapi_instrumentator import Instrumentator
 import redis
 import os
 
+
 valkey = None
 if not os.getenv("SKIP_VALKEY"):
     valkey = redis.Redis(
