@@ -5,15 +5,15 @@ from prometheus_fastapi_instrumentator import Instrumentator
 import redis
 import os
 
-valkey_host = os.getenv("VALKEY_HOST", "localhost")
-valkey_port = int(os.getenv("VALKEY_PORT", 6379))
-
-valkey = redis.Redis(
-    host=valkey_host,
-    port=valkey_port,
-    db=0,
-    decode_responses=True
-)
+if not os.getenv("SKIP_VALKEY"):
+    valkey = redis.Redis(
+        host=os.getenv("VALKEY_HOST", "localhost"),
+        port=int(os.getenv("VALKEY_PORT", 6379)),
+        db=0,
+        decode_responses=True
+    )
+else:
+    valkey = None
 
 app = FastAPI()
 router = APIRouter()

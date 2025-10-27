@@ -74,6 +74,8 @@ jobs:
                 password: ${{ secrets.DOCKER_PASSWORD }}
                 
             - name: push docker image
+              env:
+                SKIP_VALKEY: "1"
               run: |
                 TAG=$(git describe --tags)
                 docker build --build-arg APP_VERSION=$TAG -t chfrchko7/hivebox-app:$TAG ./hivebox-app
