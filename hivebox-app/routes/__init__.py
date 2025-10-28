@@ -1,10 +1,11 @@
 import version
 import api_data
-from fastapi import FastAPI, APIRouter, HTTPException
+from fastapi import FastAPI, APIRouter, HTTPException, Response, status
 from prometheus_fastapi_instrumentator import Instrumentator
 from prometheus_client import Counter
 import redis
 import os
+import requests
 
 
 valkey = None
@@ -61,5 +62,12 @@ async def temperature():
     
     valkey.setex(CACHE_KEY_TEMPERATURE, CACHE_TTL_SECONDS, classified)
     return {"average temperature": classified, "cached": False}
+
+@router.get("/readyz")
+async def api_ready():
+    if api_data.health_check(api_data.urls):
+        return Response(status_code=status.HTTP_200_OK)
+    else:
+        return Response(status_code=status.HTTP_503_SERVICE_UNAVAILABLE)
 
 app.include_router(router)
