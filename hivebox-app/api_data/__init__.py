@@ -15,15 +15,15 @@ for url in urls:
 
 average_temps = sum(temps) / len(temps)
 
-def health_check(urls):
+def health_check(links):
     accessible = 0
 
-    for url in urls:
+    for link in links:
         try:
-            response = requests.head(url, timeout=5)
-            if response.status_code == 200:
+            response = requests.head(link, timeout=30)
+            if response.status_code == 405:
                 accessible += 1
         except requests.exceptions.RequestException as e:
-            print(f"{url} inaccessible. error: {e}")
+            print(f"{link} inaccessible. error: {e}")
 
-    return accessible >= (len(urls) / 2)
+    return accessible >= (len(links) / 2)

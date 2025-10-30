@@ -5,7 +5,6 @@ from prometheus_fastapi_instrumentator import Instrumentator
 from prometheus_client import Counter
 import redis
 import os
-import requests
 
 
 valkey = None
@@ -50,6 +49,7 @@ async def temperature():
         return {"average temperature": cached_value, "cached": True}
     
     cache_misses.inc()
+    
     try:
         avg = float(api_data.average_temps)
     except Exception as e:
