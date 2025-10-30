@@ -14,3 +14,16 @@ for url in urls:
     temps.append(float(temp))
 
 average_temps = sum(temps) / len(temps)
+
+def health_check(links):
+    accessible = 0
+
+    for link in links:
+        try:
+            response = requests.head(link, timeout=30)
+            if response.status_code == 405:
+                accessible += 1
+        except requests.exceptions.RequestException as e:
+            print(f"{link} inaccessible. error: {e}")
+
+    return accessible >= (len(links) / 2)

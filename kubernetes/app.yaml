@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: hivebox-app-container
-        image: chfrchko7/hivebox-app:v0.0.12
+        image: chfrchko7/hivebox-app:v0.0.13
         ports:
         - containerPort: 5005
         env:
