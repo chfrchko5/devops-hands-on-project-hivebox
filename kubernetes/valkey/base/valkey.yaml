@@ -5,12 +5,6 @@ metadata:
   name: datastores
 
 ---
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: ingress-nginx
-
----
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
