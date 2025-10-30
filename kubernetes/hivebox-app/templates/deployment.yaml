@@ -19,6 +19,14 @@ spec:
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         ports:
         - containerPort: {{ .Values.ports.app.containerPort }}
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - |
+              STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:5005/readyz)
+              [ "$STATUS" = "405" ] || [ "$STATUS" = "200" ]
         env:
           {{- range .Values.valkeyEnv }}
           - name: {{ .name }}
