@@ -16,17 +16,18 @@ spec:
     spec:
       containers:
       - name: "{{ .Chart.Name }}-container"
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        # image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        image: hivebox-app:test
         ports:
         - containerPort: {{ .Values.ports.app.containerPort }}
         readinessProbe:
-          exec:
-            command:
-            - sh
-            - -c
-            - |
-              STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:5005/readyz)
-              [ "$STATUS" = "405" ] || [ "$STATUS" = "200" ]
+          httpGet:
+            path: {{ .Values.readinessProbe.httpGet.path }}
+            port: {{ .Values.readinessProbe.httpGet.port }}
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          failureThreshold: 5
+          timeoutSeconds: 15
         env:
           {{- range .Values.valkeyEnv }}
           - name: {{ .name }}
