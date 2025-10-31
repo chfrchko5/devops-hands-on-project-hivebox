@@ -1,0 +1,9 @@
+Oct 31 15:00:40.318 [ERRO] [testing if all endpoints are accessible] [get-version] Step "http" result is "FAIL"
+Oct 31 15:00:40.319 [ERRO] [testing if all endpoints are accessible] [get-version] Errors: 
+Oct 31 15:00:40.319 [ERRO] [testing if all endpoints are accessible] [get-version] [33mTestcase "get version", step #0-0: Get "https://hivebox.local:5050/version": tls: failed to verify certificate: x509: certificate is valid for ingress.local, not hivebox.local (endpoints.yaml:0)[0m
+Oct 31 15:00:40.322 [ERRO] [testing if all endpoints are accessible] [get-temperature] Step "http" result is "FAIL"
+Oct 31 15:00:40.322 [ERRO] [testing if all endpoints are accessible] [get-temperature] Errors: 
+Oct 31 15:00:40.322 [ERRO] [testing if all endpoints are accessible] [get-temperature] [33mTestcase "get temperature", step #0-0: Get "https://hivebox.local:5050/temperature": tls: failed to verify certificate: x509: certificate is valid for ingress.local, not hivebox.local (endpoints.yaml:0)[0m
+Oct 31 15:00:40.326 [ERRO] [testing if all endpoints are accessible] [get-readyz] Step "http" result is "FAIL"
+Oct 31 15:00:40.326 [ERRO] [testing if all endpoints are accessible] [get-readyz] Errors: 
+Oct 31 15:00:40.326 [ERRO] [testing if all endpoints are accessible] [get-readyz] [33mTestcase "get readyz", step #0-0: Get "https://hivebox.local:5050/readyz": tls: failed to verify certificate: x509: certificate is valid for ingress.local, not hivebox.local (endpoints.yaml:0)[0m

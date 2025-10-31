@@ -1,0 +1,71 @@
+---
+# application deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}
+    spec:
+      containers:
+      - name: "{{ .Chart.Name }}-container"
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        ports:
+        - containerPort: {{ .Values.ports.app.containerPort }}
+        readinessProbe:
+          httpGet:
+            path: {{ .Values.readinessProbe.httpGet.path }}
+            port: {{ .Values.readinessProbe.httpGet.port }}
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          failureThreshold: 5
+          timeoutSeconds: 15
+        env:
+          {{- range .Values.valkeyEnv }}
+          - name: {{ .name }}
+            value: {{ .value | quote }}
+          {{- end }}
+
+---
+# service for the app
+apiVersion: v1
+kind: Service
+metadata:
+  name: "{{ .Chart.Name }}-svc"
+spec:
+  selector:
+    app: {{ .Chart.Name }}
+  ports:
+  - port: {{ .Values.ports.app.httpPort }}
+    protocol: TCP
+    targetPort: {{ .Values.ports.app.containerPort }}
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: "{{ .Chart.Name }}-ingress"
+spec:
+  ingressClassName: {{ .Values.ingress.className }}
+  rules:
+    {{- range .Values.ingress.hosts }}
+    - host: {{ .host }}
+      http:
+        paths:
+          {{- range .paths }}
+          - path: {{ .path }}
+            pathType: {{ .pathType }}
+            backend:
+              service:
+                name: "{{ $.Chart.Name }}-svc"
+                port:
+                  number: {{ $.Values.ports.app.httpPort }}
+          {{- end }}
+    {{- end }}

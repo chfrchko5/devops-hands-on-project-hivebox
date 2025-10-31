@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites>
+  <testsuite name="testing if all endpoints are accessible" package="tests/endpoints.yaml" tests="3" time="1.045167">
+    <testcase classname="endpoints.yaml" name="get-version" time="0.004988514">
+      <system-out></system-out>
+      <system-err><![CDATA[
+]]></system-err>
+    </testcase>
+    <testcase classname="endpoints.yaml" name="get-temperature" time="0.003145209">
+      <system-out></system-out>
+      <system-err><![CDATA[
+]]></system-err>
+    </testcase>
+    <testcase classname="endpoints.yaml" name="get-readyz" time="1.036983375">
+      <system-out></system-out>
+      <system-err><![CDATA[
+]]></system-err>
+    </testcase>
+  </testsuite>
+</testsuites>
