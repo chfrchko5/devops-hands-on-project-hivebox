@@ -1,0 +1,31 @@
+name: testing if all endpoints are accessible
+
+testcases:
+  - name: get version
+    steps:
+    - type: http
+      method: GET
+      url: "http://hivebox.local:5050/version"
+      tls_insecure_skip_verify: true
+      assertions:
+      - result.statuscode ShouldEqual 200
+
+
+  - name: get temperature
+    steps:
+    - type: http
+      method: GET
+      url: "http://hivebox.local:5050/temperature"
+      tls_insecure_skip_verify: true
+      assertions:
+      - result.statuscode ShouldEqual 200
+
+
+  - name: get readyz
+    steps:
+    - type: http
+      method: GET
+      url: "http://hivebox.local:5050/readyz"
+      tls_insecure_skip_verify: true
+      assertions:
+      - result.statuscode ShouldEqual 200

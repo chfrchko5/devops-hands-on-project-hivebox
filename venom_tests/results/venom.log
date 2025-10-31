@@ -1,0 +1,25 @@
+Oct 31 15:06:07.041 [WARN] [testing if all endpoints are accessible] [get-version] Step "http" result is "PASS"
+Oct 31 15:06:07.044 [WARN] [testing if all endpoints are accessible] [get-temperature] Step "http" result is "PASS"
+Oct 31 15:06:08.081 [WARN] [testing if all endpoints are accessible] [get-readyz] Step "http" result is "PASS"
+.738 [ERRO] [testing if all endpoints are accessible] [get-temperature] [33mTestcase "get temperature", step #0-0: Get "https://hivebox.local:5050/temperature": http: server gave HTTP response to HTTPS client (endpoints.yaml:0)[0m
+Oct 31 15:06:00.741 [ERRO] [testing if all endpoints are accessible] [get-readyz] Step "http" result is "FAIL"
+Oct 31 15:06:00.741 [ERRO] [testing if all endpoints are accessible] [get-readyz] Errors: 
+Oct 31 15:06:00.741 [ERRO] [testing if all endpoints are accessible] [get-readyz] [33mTestcase "get readyz", step #0-0: Get "https://hivebox.local:5050/readyz": http: server gave HTTP response to HTTPS client (endpoints.yaml:0)[0m
+1 15:04:12.751 [ERRO] [testing if all endpoints are accessible] [get-readyz] Step "http" result is "FAIL"
+Oct 31 15:04:12.751 [ERRO] [testing if all endpoints are accessible] [get-readyz] Errors: 
+Oct 31 15:04:12.751 [ERRO] [testing if all endpoints are accessible] [get-readyz] [33mTestcase "get readyz", step #0-0: Get "https://hivebox.local:5050/readyz": tls: failed to verify certificate: x509: certificate is valid for ingress.local, not hivebox.local (endpoints.yaml:0)[0m
+essible] [get-temperature] Starting testcase
+Oct 31 18:55:27.946 [INFO] [testing if all endpoints are accessible] [get-temperature] Step #1 content is: {"assertions":["result.statuscode ShouldEqual 200"],"method":"GET","tls_insecure_skip_verify":true,"type":"http","url":"https://hivebox.local:5050/temperature"}
+Oct 31 18:55:27.947 [ERRO] [testing if all endpoints are accessible] [get-temperature] Step "http" result is "FAIL"
+Oct 31 18:55:27.947 [ERRO] [testing if all endpoints are accessible] [get-temperature] Errors: 
+Oct 31 18:55:27.947 [ERRO] [testing if all endpoints are accessible] [get-temperature] [33mTestcase "get temperature", step #1-0: Get "https://hivebox.local:5050/temperature": dial tcp 127.0.0.1:5050: connect: connection refused (endpoints.yaml:0)[0m
+Oct 31 18:55:27.947 [ERRO] [testing if all endpoints are accessible] [get-temperature] teststep output vars are: map[]
+Oct 31 18:55:27.947 [INFO] [testing if all endpoints are accessible] [get-temperature] Ending testcase
+Oct 31 18:55:27.947 [INFO] [testing if all endpoints are accessible] [get-readyz] Starting testcase
+Oct 31 18:55:27.947 [INFO] [testing if all endpoints are accessible] [get-readyz] Step #1 content is: {"assertions":["result.statuscode ShouldEqual 200"],"method":"GET","tls_insecure_skip_verify":true,"type":"http","url":"https://hivebox.local:5050/readyz"}
+Oct 31 18:55:27.947 [ERRO] [testing if all endpoints are accessible] [get-readyz] Step "http" result is "FAIL"
+Oct 31 18:55:27.948 [ERRO] [testing if all endpoints are accessible] [get-readyz] Errors: 
+Oct 31 18:55:27.948 [ERRO] [testing if all endpoints are accessible] [get-readyz] [33mTestcase "get readyz", step #1-0: Get "https://hivebox.local:5050/readyz": dial tcp 127.0.0.1:5050: connect: connection refused (endpoints.yaml:0)[0m
+Oct 31 18:55:27.948 [ERRO] [testing if all endpoints are accessible] [get-readyz] teststep output vars are: map[]
+Oct 31 18:55:27.948 [INFO] [testing if all endpoints are accessible] [get-readyz] Ending testcase
+Oct 31 18:55:27.948 [INFO] [testing if all endpoints are accessible] Ending testsuite

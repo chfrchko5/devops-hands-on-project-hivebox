@@ -20,7 +20,7 @@ ports:
 
 valkeyEnv:
   - name: VALKEY_HOST
-    value: "valkey.datastores.svc.cluster.local"
+    value: "prod-valkey.datastores.svc.cluster.local"
   - name: VALKEY_PORT
     value: "6379"
 

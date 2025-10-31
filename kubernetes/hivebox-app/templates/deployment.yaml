@@ -16,8 +16,7 @@ spec:
     spec:
       containers:
       - name: "{{ .Chart.Name }}-container"
-        # image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        image: hivebox-app:test
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         ports:
         - containerPort: {{ .Values.ports.app.containerPort }}
         readinessProbe:
