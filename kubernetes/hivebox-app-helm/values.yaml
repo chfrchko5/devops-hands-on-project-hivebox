@@ -17,6 +17,7 @@ ports:
   app:
     containerPort: 5005
     httpPort: 80
+    name: app-port
 
 valkeyEnv:
   - name: VALKEY_HOST

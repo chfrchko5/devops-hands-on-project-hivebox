@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hivebox-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/chfrchko5/devops-hands-on-project-hivebox
+    path: kubernetes/hivebox-app-helm
+    targetRevision: main
+  destination:
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: True
+      selfHeal: True
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
