@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: nginx-ingress
+  name: valkey
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/chfrchko5/devops-hands-on-project-hivebox
-    path: kubernetes/nginx-ingress
+    path: kubernetes/valkey/overlays/prod
     targetRevision: main
   destination:
     server: https://kubernetes.default.svc
-    namespace: ingress-nginx
+    namespace: datastores
   syncPolicy:
     automated:
       prune: True

@@ -1,5 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: metrics
+  name: metrics-stack
   namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/chfrchko5/devops-hands-on-project-hivebox
+    path: kubernetes/metrics-stack
+    targetRevision: main
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: metrics
+  syncPolicy:
+    automated:
+      prune: True
+      selfHeal: True
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
