@@ -53,3 +53,65 @@ Here is a pre-start checklist:
 ## Implementation
 
 ** ADD YOUR IMPLEMENTATION DOCUMENTATION HERE **
+Nov 2, 2025
+added argocd manifests for auto deployment of the project
+using a helm chart ‘kube-prometheus-stack’ alongside service monitors for valkey and app to set up metric tracking in grafana
+added a grafana dashboard for hivebox app
+added a grafana dashboard for valkey
+
+Nov 1, 2025
+organized the files for nginx-ingress to be more clean
+
+Oct 31, 2025
+implemented readinessProbe in the kubernetes app yaml file to check if readyz endpoint returns 200 OK to set container status to ready
+implemented terraform for the deployment of the kubernetes cluster with kind
+implemented venom declarative simple test for the endpoints, ran locally
+
+Oct 30, 2025
+fixed readyz endpoint
+created a helm chart for the application
+added a simple kustomization yaml for valkey that uses the same base file as before
+implemented initial code for readinessProbe for app pod in k8s
+
+Oct 28, 2025
+added a readyz endpoint for later use in kubernetes that checks if api urls are accessible
+extended default prometheus metrics by a simple caching hit/miss collector
+
+Oct 27, 2025
+added and fixed valkey caching in python code
+fixed github workflow not working after implementing valkey
+
+Oct 25, 2025
+fixed nginx ingress on kubernetes cluster (port-forward the ingress controller in order to access the endpoints of the app using a local domain via /etc/hosts)
+
+Oct 23, 2025
+added a checkov scan workflow file to scan kubernetes manifest files for vulnerabilities/errors (instead of initial terrascan setup)
+
+Oct 22, 2025
+fixed auto versioning in python when deployed in docker
+added a simple k8s yaml file to deploy in a cluster
+
+Oct 20, 2025
+implemented a prometheus scraped /metrics endpoint
+improved pytesting
+
+Oct 18, 2025
+added automatic docker push in github workflow, uses the same version for the image as the github repo and the python api application for consistency
+added a github workflow for repo code security check (ossf)
+implemented additional information display based on the calculation of the temperature
+
+Oct 13, 2025
+implemented version sync for the python app, uses git tag as its’ source
+implemented auto tag increment in github actions workflow file
+implemented creation of the docker image
+
+Oct 12, 2025
+implemented /temperature endpoint that takes the temperature value from three senseBox URL’s and calculates the average between them
+implemented 2 sample unit tests for /version and /temperature endpoints
+
+Oct 10, 2025
+implemented /version endpoint that displays current version of the app
+
+Oct 9, 2025
+initialized the python api project with v0.0.1 version
+created a simple dockerfile to print app’s version in the container
