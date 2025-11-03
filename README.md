@@ -53,7 +53,7 @@ Here is a pre-start checklist:
 ## Implementation
 
 ** ADD YOUR IMPLEMENTATION DOCUMENTATION HERE **
-- Nov 2, 2025
+Nov 2, 2025
 added argocd manifests for auto deployment of the project
 using a helm chart ‘kube-prometheus-stack’ alongside service monitors for valkey and app to set up metric tracking in grafana
 added a grafana dashboard for hivebox app
