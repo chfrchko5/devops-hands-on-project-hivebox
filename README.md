@@ -49,6 +49,19 @@ Here is a pre-start checklist:
 </p>
 
 ---
+### installation
+- create the kubernetes cluster using terraform (from inside the terraform directory)
+  "terraform apply"
+- install argocd if not present
+  "https://argo-cd.readthedocs.io/en/stable/getting_started/"
+- apply argocd manifests via kubectl to automatically deploy all resources (from inside kubernetes-argocd directory)
+"kubectl apply -f argocd-manifests"
+- due to no dns, append domain in /etc/hosts
+"echo hivebox.local >> /etc/hosts"
+- forward the port for nginx ingress due to not having any loadbalancers
+"kubectl -n ingress-nginx port-forward svc/ingress-nginx-controller 5050:80"
+- access the page in browser via https://hivebox.local:5050/(endpoint)
+
 
 ## Implementation
 
